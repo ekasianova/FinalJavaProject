@@ -1,5 +1,6 @@
+import javaTask.DateCreation;
+import javaTask.Student;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -14,28 +15,28 @@ public class StudentsTest {
     Student testStudent = new Student();
 
 
-    @Test( expected = DataFormatException.class)
-    public void OneNameWithOnlyNumbersTest() throws DataFormatException {
+    @Test(expected = DataFormatException.class)
+    public void oneNameWithOnlyNumbersTest() throws DataFormatException {
         testStudent.setName("123 567");
     }
 
-    @Test( expected = DataFormatException.class)
-    public void NameWithNumberInTheBeginningTest() throws DataFormatException {
+    @Test(expected = DataFormatException.class)
+    public void nameWithNumberInTheBeginningTest() throws DataFormatException {
         testStudent.setName("1Jane Eyre");
     }
 
-    @Test( expected = DataFormatException.class)
-    public void NameWithNumberInTheEndTest() throws DataFormatException {
+    @Test(expected = DataFormatException.class)
+    public void nameWithNumberInTheEndTest() throws DataFormatException {
         testStudent.setName("Jane Eyre1");
     }
 
-    @Test( expected = DataFormatException.class)
-    public void NameWithNumberInTheMiddleTest() throws DataFormatException {
+    @Test(expected = DataFormatException.class)
+    public void nameWithNumberInTheMiddleTest() throws DataFormatException {
         testStudent.setName("J1ane Eyre");
     }
 
     @Test
-    public void CorrectName() throws DataFormatException {
+    public void correctName() throws DataFormatException {
         testStudent.setName("Jane Eyre");
         assertThat("Jane Eyre", equalTo(testStudent.name));
     }
@@ -43,7 +44,7 @@ public class StudentsTest {
     // Curriculum same as name
 
     @Test
-    public void CorrectCurriculum() throws DataFormatException {
+    public void correctCurriculum() throws DataFormatException {
         testStudent.setCurriculum("QA Java Class");
         assertThat("QA Java Class", equalTo(testStudent.curriculum));
     }
@@ -51,18 +52,20 @@ public class StudentsTest {
     @Test
     public void correctDataSet() throws ParseException {
         testStudent.setStartDate("1 June 2020 - Monday");
-        Assert.assertEquals(DateCreation.createDate(1, 5, 2020, 10).getTime(), testStudent.startDate.getTime());
+        Assert.assertEquals(DateCreation.createDate(1, 5, 2020, 10).getTime(),
+                testStudent.startDate.getTime());
     }
 
     @Test(expected = ParseException.class)
-    public void WrongDataSetPattern() throws ParseException {
+    public void wrongDataSetPattern() throws ParseException {
         testStudent.setStartDate("1 bla bla bla June 2020 - Monday");
     }
 
     @Test
     public void correctDataSetWithAppropriateSpaces() throws ParseException {
         testStudent.setStartDate(" 1 June  2020 - Monday ");
-        Assert.assertEquals(DateCreation.createDate(1, 5, 2020, 10).getTime(), testStudent.startDate.getTime());
+        Assert.assertEquals(DateCreation.createDate(1, 5, 2020, 10).getTime(),
+                testStudent.startDate.getTime());
     }
 
     @Test(expected = ParseException.class)
@@ -81,7 +84,7 @@ public class StudentsTest {
     }
 
     @Test
-    public void AddCorrectCourse() throws DataFormatException {
+    public void addCorrectCourse() throws DataFormatException {
         testStudent.addCourse("Java", 10);
 
         assertThat(testStudent.courses, hasEntry("Java", 10));
@@ -89,7 +92,7 @@ public class StudentsTest {
     }
 
     @Test
-    public void CheckTimeForAllCourses() throws DataFormatException{
+    public void checkTimeForAllCourses() throws DataFormatException {
         testStudent.addCourse("Java", 10);
         testStudent.addCourse("QA Theory", 10);
 
