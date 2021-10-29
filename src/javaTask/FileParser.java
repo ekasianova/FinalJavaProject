@@ -22,26 +22,34 @@ public class FileParser {
         List<Student> students = new ArrayList<>();
         Student newStudent = null;  // ?null
         String line;
-        while ((line = br.readLine()) != null) { // switch
+        while ((line = br.readLine()) != null) {
             String[] splitStr = line.split("\\s+");
-            if (splitStr[0].equals("STUDENT:")) {
-                newStudent = new Student();
-                newStudent.setName(line.split(":")[1].trim());
-                students.add(newStudent);
-            } else if (splitStr[0].equals("CURRICULUM:")) {
-                if (newStudent == null)
-                    throw new DataFormatException("Wrong File format");
-                newStudent.setCurriculum(line.split(": ")[1]);
-            } else if (splitStr[0].equals("START_DATE:")) {
-                if (newStudent == null)
-                    throw new DataFormatException("Wrong File format");
-                newStudent.setStartDate(line.split(":")[1].trim());
-            } else if (parseNumber(splitStr[0])) {
-                if (newStudent == null)
-                    throw new DataFormatException("Wrong File format");
-                String[] courseSplit = line.replaceAll("\\s+", "").split("\\.");
-                Integer duration = Integer.parseInt(courseSplit[2]);
-                newStudent.addCourse(courseSplit[1], duration);
+            switch (splitStr[0]){
+                case "STUDENT:":
+                    newStudent = new Student();
+                    newStudent.setName(line.split(":")[1].trim());
+                    students.add(newStudent);
+                    break;
+                case "CURRICULUM:":
+                    isStudentExist(newStudent);
+                    newStudent.setCurriculum(line.split(": ")[1]);
+                    break;
+                case "START_DATE:":
+                    isStudentExist(newStudent);
+                    newStudent.setStartDate(line.split(":")[1].trim());
+                case "COURSE":
+                    continue;
+                default:
+                    if(parseNumber(splitStr[0])) {
+                    isStudentExist(newStudent);
+                    String[] courseSplit = line.replaceAll("\\s+", " ").split("\\.");
+                    Integer duration = Integer.parseInt(courseSplit[2].trim());
+                    newStudent.addCourse(courseSplit[1].trim(), duration);
+                    }
+                    else {
+                        if(!splitStr[0].matches("^[\\s-]*$"))
+                            throw new DataFormatException("Not informative lines could contain blank spaces or '-' symbol");
+                    }
             }
         }
         checkList(students);
@@ -59,6 +67,11 @@ public class FileParser {
             checkFields(currentStudent);
         }
 
+    }
+
+    private void isStudentExist(Student student) throws DataFormatException {
+        if(student == null)
+            throw new DataFormatException("Wrong File format");
     }
 
     private void checkFields(Student student) throws DataFormatException {

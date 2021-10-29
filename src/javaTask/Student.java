@@ -1,10 +1,10 @@
 package javaTask;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.zip.DataFormatException;
+import static javaTask.DateCreation.createStartDateForStudent;
+
 
 public class Student {
     public String name;
@@ -14,6 +14,15 @@ public class Student {
     public int timeForAllCourses = 0;
 
     public Student() {
+    }
+
+    public Student(String name, String curriculum, String date, Map<String, Integer> courses,
+                   int timeForAllCourses) throws DataFormatException, ParseException {
+        setName(name);
+        setCurriculum(curriculum);
+        setStartDate(date);
+        this.courses = courses;
+        this.timeForAllCourses = timeForAllCourses;
     }
 
     public void setName(String name) throws DataFormatException {
@@ -29,15 +38,7 @@ public class Student {
     }
 
     public void setStartDate(String date) throws ParseException {
-        DateFormat format = new SimpleDateFormat("d MMMM yyyy - E");
-        format.setLenient(false);
-        startDate = format.parse(date);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(startDate);
-        cal.set(Calendar.HOUR, 10);
-        cal.set(Calendar.MILLISECOND, 0);
-        cal.set(Calendar.MINUTE, 0);
-        startDate = cal.getTime();
+        startDate = createStartDateForStudent(date);
     }
 
     public void addCourse(String name, Integer duration) throws DataFormatException {
@@ -55,4 +56,19 @@ public class Student {
         return false;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+        if(!(obj instanceof Student))
+            return false;
+
+        Student student = (Student) obj;
+
+        return (this.name.equals(student.name) &&
+                this.curriculum.equals(student.curriculum) &&
+                this.startDate.equals(student.startDate) &&
+                this.timeForAllCourses == student.timeForAllCourses &&
+                this.courses.equals(student.courses));
+    }
 }

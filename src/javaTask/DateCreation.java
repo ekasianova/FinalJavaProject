@@ -19,7 +19,7 @@ public class DateCreation {
         return cal.getTime();
     }
 
-    public static Date parseDate(String[] commandLineArgs) throws ParseException {
+    public static Date parseDateFromCommandLine(String[] commandLineArgs) throws ParseException {
         int dateTokens = 4;
         StringBuilder buildStringDate = new StringBuilder();
         for (int i = 0; i < commandLineArgs.length && i < dateTokens; i++) {
@@ -32,6 +32,19 @@ public class DateCreation {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
         cal.set(Calendar.MILLISECOND, 0);
-        return (cal.getTime());
+        return cal.getTime();
     }
+
+    public static Date createStartDateForStudent(String date) throws ParseException {
+        DateFormat format = new SimpleDateFormat("d MMMM yyyy - E");
+        format.setLenient(false);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(format.parse(date));
+        cal.set(Calendar.HOUR, 10);
+        cal.set(Calendar.MILLISECOND, 0);
+        cal.set(Calendar.MINUTE, 0);
+        return cal.getTime();
+    }
+
+
 }

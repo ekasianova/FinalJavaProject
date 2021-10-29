@@ -7,10 +7,10 @@ import java.util.concurrent.TimeUnit;
 public class CountingRestDays {
     public Date beginningDate;
     public Date currentDate;
-    public Date lastStudyingDay;
+    public Date lastStudyingDate;
     public boolean isFinished = false;
-    public long days = 0;
-    public long hours = 0;
+    public long restDays;
+    public long restHours;
     public int timeOfAllCourses;
     public final static int DAY_HOURS = 24;
     public final static int WORKING_HOURS = 8;
@@ -19,30 +19,31 @@ public class CountingRestDays {
         this.beginningDate = beginningDate;
         this.currentDate = currentDate;
         this.timeOfAllCourses = timeTillEnd;
-        this.lastStudyingDay = getFinalDate();
+        this.lastStudyingDate = getFinalDate();
         counting();
     }
 
     private void counting() {
         long diffInMillis;
-        isFinished = lastStudyingDay.before(currentDate);
-        diffInMillis = Math.abs(currentDate.getTime() - lastStudyingDay.getTime());
+        isFinished = lastStudyingDate.before(currentDate) || lastStudyingDate.equals(currentDate);
+        diffInMillis = Math.abs(currentDate.getTime() - lastStudyingDate.getTime());
         long diff = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
-        days = diff / DAY_HOURS;
-        hours = diff % DAY_HOURS;
+        restDays = diff / DAY_HOURS;
+        restHours = diff % DAY_HOURS;
     }
 
     public Date getFinalDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(beginningDate);
         int restTime = timeOfAllCourses;
+        int beginningOfWorkingDay = 10;
         while (restTime > 0) {
             {
                 if ((Calendar.SATURDAY != calendar.get(Calendar.DAY_OF_WEEK))
                         && (Calendar.SUNDAY != calendar.get(Calendar.DAY_OF_WEEK))) {
                     if (restTime <= WORKING_HOURS) {
-                        int time = calendar.get(Calendar.HOUR_OF_DAY) + restTime;
-                        calendar.set(Calendar.HOUR_OF_DAY, time);
+                       // int time = calendar.get(Calendar.HOUR_OF_DAY) + restTime;
+                        calendar.set(Calendar.HOUR_OF_DAY, beginningOfWorkingDay + restTime);
                         break;
                     }
                     restTime -= WORKING_HOURS;

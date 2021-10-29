@@ -1,12 +1,10 @@
 package javaTask;
 
-import javaTask.FileParser;
-
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-import static javaTask.DateCreation.parseDate;
+import static javaTask.DateCreation.parseDateFromCommandLine;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,7 +16,7 @@ public class Main {
         }
 
         try {
-            launchDate = parseDate(args);
+            launchDate = parseDateFromCommandLine(args);
         } catch (ParseException e) {
             System.out.println(" Command line must start with a date in the format \"d MMMM yyyy HH.mm\" ");
             e.printStackTrace();

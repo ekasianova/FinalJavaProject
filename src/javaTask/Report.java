@@ -1,7 +1,5 @@
 package javaTask;
 
-import javaTask.CountingRestDays;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -20,10 +18,10 @@ public class Report {
 
             if (restDays.isFinished)
                 System.out.printf("%s (%s) - Training completed. %d days %d hours have passed since the end.%n",
-                        currentStudent.name, currentStudent.curriculum, restDays.days, restDays.hours);
+                        currentStudent.name, currentStudent.curriculum, restDays.restDays, restDays.restHours);
             else
                 System.out.printf("%s (%s) - Training is not finished. %d days %d hours are left until the the end.%n",
-                        currentStudent.name, currentStudent.curriculum, restDays.days, restDays.hours);
+                        currentStudent.name, currentStudent.curriculum, restDays.restDays, restDays.restHours);
         }
     }
 
@@ -42,16 +40,16 @@ public class Report {
             SimpleDateFormat format = new SimpleDateFormat("dd MMMM yyyy, HH.mm");
             String formattedDate = format.format(currentStudent.startDate);
             System.out.println("Start date " + formattedDate);
-            formattedDate = format.format(restDays.lastStudyingDay);
+            formattedDate = format.format(restDays.lastStudyingDate);
             System.out.println("Last date " + formattedDate);
 
 
             if (restDays.isFinished)
                 System.out.printf("%d days %d hours have passed since the end.%n",
-                        restDays.days, restDays.hours);
+                        restDays.restDays, restDays.restHours);
             else
                 System.out.printf("%d days %d hours are left until the the end.%n",
-                        restDays.days, restDays.hours);
+                        restDays.restDays, restDays.restHours);
 
         }
     }
