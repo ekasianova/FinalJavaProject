@@ -38,7 +38,7 @@ public class StudentsTest {
     @Test
     public void correctName() throws DataFormatException {
         testStudent.setName("Jane Eyre");
-        assertThat("Jane Eyre", equalTo(testStudent.name));
+        assertThat("Jane Eyre", equalTo(testStudent.getName()));
     }
 
     // Curriculum same as name
@@ -46,14 +46,14 @@ public class StudentsTest {
     @Test
     public void correctCurriculum() throws DataFormatException {
         testStudent.setCurriculum("QA Java Class");
-        assertThat("QA Java Class", equalTo(testStudent.curriculum));
+        assertThat("QA Java Class", equalTo(testStudent.getCurriculum()));
     }
 
     @Test
     public void correctDataSet() throws ParseException {
         testStudent.setStartDate("1 June 2020 - Monday");
         Assert.assertEquals(DateCreation.createDate(1, 5, 2020, 10).getTime(),
-                testStudent.startDate.getTime());
+                testStudent.getStartDate().getTime());
     }
 
     @Test(expected = ParseException.class)
@@ -65,7 +65,7 @@ public class StudentsTest {
     public void correctDataSetWithAppropriateSpaces() throws ParseException {
         testStudent.setStartDate(" 1 June  2020 - Monday ");
         Assert.assertEquals(DateCreation.createDate(1, 5, 2020, 10).getTime(),
-                testStudent.startDate.getTime());
+                testStudent.getStartDate().getTime());
     }
 
     @Test(expected = ParseException.class)
@@ -87,8 +87,8 @@ public class StudentsTest {
     public void addCorrectCourse() throws DataFormatException {
         testStudent.addCourse("Java", 10);
 
-        assertThat(testStudent.courses, hasEntry("Java", 10));
-        assertThat(testStudent.timeForAllCourses, equalTo(10));
+        assertThat(testStudent.getCourses(), hasEntry("Java", 10));
+        assertThat(testStudent.getTimeForAllCourses(), equalTo(10));
     }
 
     @Test
@@ -96,8 +96,8 @@ public class StudentsTest {
         testStudent.addCourse("Java", 10);
         testStudent.addCourse("QA Theory", 10);
 
-        assertThat(testStudent.courses, hasEntry("QA Theory", 10));
-        assertThat(testStudent.timeForAllCourses, equalTo(20));
+        assertThat(testStudent.getCourses(), hasEntry("QA Theory", 10));
+        assertThat(testStudent.getTimeForAllCourses(), equalTo(20));
     }
 
 }

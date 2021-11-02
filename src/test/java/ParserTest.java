@@ -17,44 +17,44 @@ public class ParserTest {
 
     @Test(expected = DataFormatException.class)
     public void testEmptyNameWithOneStudent() throws DataFormatException, IOException, ParseException {
-        FileParser parser = new FileParser( userDirectory + "/Test/testData/testEmptyName");
-        parser.Parse();
+        FileParser parser = new FileParser( userDirectory + "/src/test/java/testData/testEmptyName");
+        parser.parse();
     }
 
     @Test(expected = DataFormatException.class)
     public void testEmptyDate() throws DataFormatException, IOException, ParseException {
-        FileParser parser = new FileParser(userDirectory  + "/Test/testData/testEmptyDate");
-        parser.Parse();
+        FileParser parser = new FileParser(userDirectory  + "/src/test/java/testData/testEmptyDate");
+        parser.parse();
     }
 
     @Test(expected = DataFormatException.class)
     public void testEmptyCurriculum() throws DataFormatException, IOException, ParseException {
-        FileParser parser = new FileParser(userDirectory + "/Test/testData/testEmptyCurriculum");
-        parser.Parse();
+        FileParser parser = new FileParser(userDirectory + "/src/test/java/testData/testEmptyCurriculum");
+        parser.parse();
     }
 
     @Test(expected = DataFormatException.class)
     public void testEmptyCourses() throws DataFormatException, IOException, ParseException {
-        FileParser parser = new FileParser(userDirectory + "/Test/testData/testEmptyCourses");
-        parser.Parse();
+        FileParser parser = new FileParser(userDirectory + "/src/test/java/testData/testEmptyCourses");
+        parser.parse();
     }
 
     @Test(expected = IllegalStateException.class)
     public void testEmptyFile()throws DataFormatException, IOException, ParseException {
-        FileParser parser = new FileParser(userDirectory + "/Test/testData/emptyFile");
-        parser.Parse();
+        FileParser parser = new FileParser(userDirectory + "/src/test/java/testData/emptyFile");
+        parser.parse();
     }
 
     @Test(expected = DataFormatException.class)
     public void testNotAcceptedLine() throws DataFormatException, IOException, ParseException {
-        FileParser parser = new FileParser(userDirectory + "/Test/testData/strangeLine");
-        parser.Parse();
+        FileParser parser = new FileParser(userDirectory + "/src/test/java/testData/strangeLine");
+        parser.parse();
     }
 
     @Test
     public void parseOneStudent() throws DataFormatException, IOException, ParseException {
-        FileParser parser = new FileParser(userDirectory + "/Test/testData/oneStudent");
-        List<Student> students = parser.Parse();
+        FileParser parser = new FileParser(userDirectory + "/src/test/java/testData/oneStudent");
+        List<Student> students = parser.parse();
         Map<String, Integer> courses = new HashMap<>();
         courses.put("Java", 16);
         courses.put("JDBC", 24);
@@ -69,8 +69,8 @@ public class ParserTest {
 
     @Test
     public void parseTwoStudents() throws DataFormatException, IOException, ParseException {
-        FileParser parser = new FileParser(userDirectory + "/Test/testData/twoStudents");
-        List<Student> students = parser.Parse();
+        FileParser parser = new FileParser(userDirectory + "/src/test/java/testData/twoStudents");
+        List<Student> students = parser.parse();
         Map<String, Integer> coursesFirstStudent = new HashMap<>();
         coursesFirstStudent.put("Java", 16);
         coursesFirstStudent.put("JDBC", 24);

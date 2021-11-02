@@ -1,23 +1,21 @@
 package javaTask;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.zip.DataFormatException;
 
 public class FileParser {
-    String filepath;
+    private String filepath;
 
     public FileParser(String filepath) {
         this.filepath = filepath;
     }
 
-    public List<Student> Parse() throws IOException, ParseException, DataFormatException {
+    public List<Student> parse() throws IOException, ParseException, DataFormatException {
         BufferedReader br = new BufferedReader(new FileReader(filepath));
         List<Student> students = new ArrayList<>();
         Student newStudent = null;  // ?null
@@ -41,10 +39,10 @@ public class FileParser {
                     continue;
                 default:
                     if(parseNumber(splitStr[0])) {
-                    isStudentExist(newStudent);
-                    String[] courseSplit = line.replaceAll("\\s+", " ").split("\\.");
-                    Integer duration = Integer.parseInt(courseSplit[2].trim());
-                    newStudent.addCourse(courseSplit[1].trim(), duration);
+                        isStudentExist(newStudent);
+                        String[] courseSplit = line.replaceAll("\\s+", " ").split("\\.");
+                        Integer duration = Integer.parseInt(courseSplit[2].trim());
+                        newStudent.addCourse(courseSplit[1].trim(), duration);
                     }
                     else {
                         if(!splitStr[0].matches("^[\\s-]*$"))
@@ -58,26 +56,25 @@ public class FileParser {
 
     private void checkList(List<Student> students) throws DataFormatException {
         if (students.isEmpty()) {
-            throw new IllegalStateException("No students found");
+            throw new IllegalStateException("No students found after parsing file");
         }
-        Iterator<Student> studentIterator = students.iterator();
-        Student currentStudent;
-        while (studentIterator.hasNext()) {
-            currentStudent = studentIterator.next();
+        for (Student currentStudent: students) {
             checkFields(currentStudent);
         }
 
     }
 
     private void isStudentExist(Student student) throws DataFormatException {
-        if(student == null)
-            throw new DataFormatException("Wrong File format");
+        if(student == null) {
+            throw new DataFormatException("Wrong file formatting");
+        }
     }
 
     private void checkFields(Student student) throws DataFormatException {
-        if (student.name == null || student.courses.isEmpty() || student.curriculum == null
-                || student.startDate == null)
-            throw new DataFormatException("Some fields are empty");
+        if (student.getName() == null || student.getCourses().isEmpty() || student.getCurriculum() == null
+                || student.getStartDate() == null) {
+            throw new DataFormatException("Some fields are empty after file parsing");
+        }
 
     }
 

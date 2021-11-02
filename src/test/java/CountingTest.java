@@ -15,11 +15,11 @@ public class CountingTest {
         Date begDate = DateCreation.createDate(22, 2, 2021, 10);
         int timeTillEnd = 4;
         CountingRestDays nextDays = new CountingRestDays(begDate, curDate, timeTillEnd);
-        Assert.assertTrue("Are courses finished", nextDays.isFinished);
-        Assert.assertEquals("Days assertion", 0, nextDays.restDays);
-        Assert.assertEquals("Hours assertion", 2, nextDays.restHours);
+        Assert.assertTrue("Are courses finished", nextDays.isFinished());
+        Assert.assertEquals("Days assertion", 0, nextDays.getRestDays());
+        Assert.assertEquals("Hours assertion", 2, nextDays.getRestHours());
         Assert.assertEquals("Final date assertion", DateCreation.createDate(22, 2, 2021, 14).getTime(),
-                nextDays.lastStudyingDate.getTime());
+                nextDays.getLastStudyingDate().getTime());
     }
 
     @Test
@@ -28,10 +28,10 @@ public class CountingTest {
         Date begDate = DateCreation.createDate(23, 2, 2021, 10);
         int timeTillEnd = 10;
         CountingRestDays nextDays = new CountingRestDays(begDate, curDate, timeTillEnd);
-        Assert.assertFalse(nextDays.isFinished);
-        Assert.assertEquals(1, nextDays.restDays);
-        Assert.assertEquals(20, nextDays.restHours);
-        Assert.assertEquals(DateCreation.createDate(24, 2, 2021, 12).getTime(), nextDays.lastStudyingDate.getTime());
+        Assert.assertFalse(nextDays.isFinished());
+        Assert.assertEquals(1, nextDays.getRestDays());
+        Assert.assertEquals(20, nextDays.getRestHours());
+        Assert.assertEquals(DateCreation.createDate(24, 2, 2021, 12).getTime(), nextDays.getLastStudyingDate().getTime());
     }
 
     @Test
@@ -40,10 +40,10 @@ public class CountingTest {
         Date begDate = DateCreation.createDate(22, 2, 2021, 10);
         int timeTillEnd = 10;
         CountingRestDays nextDays = new CountingRestDays(begDate, curDate, timeTillEnd);
-        Assert.assertFalse(nextDays.isFinished);
-        Assert.assertEquals(1, nextDays.restDays);
-        Assert.assertEquals(2, nextDays.restHours);
-        Assert.assertEquals(DateCreation.createDate(23, 2, 2021, 12).getTime(), nextDays.lastStudyingDate.getTime());
+        Assert.assertFalse(nextDays.isFinished());
+        Assert.assertEquals(1, nextDays.getRestDays());
+        Assert.assertEquals(2, nextDays.getRestHours());
+        Assert.assertEquals(DateCreation.createDate(23, 2, 2021, 12).getTime(), nextDays.getLastStudyingDate().getTime());
     }
 
     @Test
@@ -52,11 +52,11 @@ public class CountingTest {
         Date begDate = DateCreation.createDate(16, 6, 2021, 10);
         int timeTillEnd = 18;
         CountingRestDays nextDays = new CountingRestDays(begDate, curDate, timeTillEnd);
-        Assert.assertFalse(nextDays.isFinished);
-        Assert.assertEquals(0, nextDays.restDays);
-        Assert.assertEquals(2, nextDays.restHours);
+        Assert.assertFalse(nextDays.isFinished());
+        Assert.assertEquals(0, nextDays.getRestDays());
+        Assert.assertEquals(2, nextDays.getRestHours());
         Date expectedDate = DateCreation.createDate(20, 6, 2021, 12);
-        Assert.assertEquals(expectedDate.getTime(), nextDays.lastStudyingDate.getTime());
+        Assert.assertEquals(expectedDate.getTime(), nextDays.getLastStudyingDate().getTime());
     }
 
     @Test
@@ -66,11 +66,11 @@ public class CountingTest {
         int timeTillEnd = 0;
 
         CountingRestDays nextDays = new CountingRestDays(begDate, curDate, timeTillEnd);
-        Assert.assertTrue(nextDays.isFinished);
-        Assert.assertEquals(0, nextDays.restDays);
-        Assert.assertEquals(0, nextDays.restHours);
+        Assert.assertTrue(nextDays.isFinished());
+        Assert.assertEquals(0, nextDays.getRestDays());
+        Assert.assertEquals(0, nextDays.getRestHours());
         Date expectedDate = DateCreation.createDate(25, 9, 2021, 10);
-        Assert.assertEquals(expectedDate.getTime(), nextDays.lastStudyingDate.getTime());
+        Assert.assertEquals(expectedDate.getTime(), nextDays.getLastStudyingDate().getTime());
     }
 
     @Test
@@ -80,11 +80,11 @@ public class CountingTest {
         int timeTillEnd = 8;
 
         CountingRestDays nextDays = new CountingRestDays(begDate, curDate, timeTillEnd);
-        Assert.assertFalse(nextDays.isFinished);
-        Assert.assertEquals(0, nextDays.restDays);
-        Assert.assertEquals(8, nextDays.restHours);
+        Assert.assertFalse(nextDays.isFinished());
+        Assert.assertEquals(0, nextDays.getRestDays());
+        Assert.assertEquals(8, nextDays.getRestHours());
         Date expectedDate = DateCreation.createDate(25, 9, 2021, 18);
-        Assert.assertEquals(expectedDate.getTime(), nextDays.lastStudyingDate.getTime());
+        Assert.assertEquals(expectedDate.getTime(), nextDays.getLastStudyingDate().getTime());
     }
 
     @Test
@@ -94,11 +94,11 @@ public class CountingTest {
         int timeTillEnd = 4;
 
         CountingRestDays nextDays = new CountingRestDays(begDate, curDate, timeTillEnd);
-        Assert.assertFalse(nextDays.isFinished);
-        Assert.assertEquals(0, nextDays.restDays);
-        Assert.assertEquals(4, nextDays.restHours);
+        Assert.assertFalse(nextDays.isFinished());
+        Assert.assertEquals(0, nextDays.getRestDays());
+        Assert.assertEquals(4, nextDays.getRestHours());
         Date expectedDate = DateCreation.createDate(25, 9, 2021, 14);
-        Assert.assertEquals(expectedDate.getTime(), nextDays.lastStudyingDate.getTime());
+        Assert.assertEquals(expectedDate.getTime(), nextDays.getLastStudyingDate().getTime());
     }
 
     @Test
@@ -108,11 +108,11 @@ public class CountingTest {
         int timeTillEnd = 12;
 
         CountingRestDays nextDays = new CountingRestDays(begDate, curDate, timeTillEnd);
-        Assert.assertFalse(nextDays.isFinished);
-        Assert.assertEquals(1, nextDays.restDays);
-        Assert.assertEquals(4, nextDays.restHours);
+        Assert.assertFalse(nextDays.isFinished());
+        Assert.assertEquals(1, nextDays.getRestDays());
+        Assert.assertEquals(4, nextDays.getRestHours());
         Date expectedDate = DateCreation.createDate(26, 9, 2021, 14);
-        Assert.assertEquals(expectedDate.getTime(), nextDays.lastStudyingDate.getTime());
+        Assert.assertEquals(expectedDate.getTime(), nextDays.getLastStudyingDate().getTime());
     }
 
     @Test
@@ -122,11 +122,11 @@ public class CountingTest {
         int timeTillEnd = 5 * 8 + 4;
 
         CountingRestDays nextDays = new CountingRestDays(begDate, curDate, timeTillEnd);
-        Assert.assertFalse(nextDays.isFinished);
-        Assert.assertEquals(7, nextDays.restDays);
-        Assert.assertEquals(4, nextDays.restHours);
+        Assert.assertFalse(nextDays.isFinished());
+        Assert.assertEquals(7, nextDays.getRestDays());
+        Assert.assertEquals(4, nextDays.getRestHours());
         Date expectedDate = DateCreation.createDate(1, 10, 2021, 14);
-        Assert.assertEquals(expectedDate.getTime(), nextDays.lastStudyingDate.getTime());
+        Assert.assertEquals(expectedDate.getTime(), nextDays.getLastStudyingDate().getTime());
 
     }
 

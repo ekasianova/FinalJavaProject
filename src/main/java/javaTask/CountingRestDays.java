@@ -5,15 +5,15 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class CountingRestDays {
-    public Date beginningDate;
-    public Date currentDate;
-    public Date lastStudyingDate;
-    public boolean isFinished = false;
-    public long restDays;
-    public long restHours;
-    public int timeOfAllCourses;
-    public final static int DAY_HOURS = 24;
-    public final static int WORKING_HOURS = 8;
+    private Date beginningDate;
+    private Date currentDate;
+    private Date lastStudyingDate;
+    private boolean isFinished = false;
+    private long restDays;
+    private long restHours;
+    private int timeOfAllCourses;
+    private final static int DAY_HOURS = 24;
+    private final static int WORKING_HOURS = 8;
 
     public CountingRestDays(Date beginningDate, Date currentDate, int timeTillEnd) {
         this.beginningDate = beginningDate;
@@ -52,5 +52,21 @@ public class CountingRestDays {
             }
         }
         return calendar.getTime();
+    }
+
+    public Date getLastStudyingDate() {
+        return lastStudyingDate;
+    }
+
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    public long getRestDays() {
+        return restDays;
+    }
+
+    public long getRestHours() {
+        return restHours;
     }
 }
